@@ -1,7 +1,3 @@
-CONFIG = {
-    'working_dir': '/home/box/web/',
-    'args': [
-        '-b=0.0.0.0:8080',
-        'hello:app'
-    ]
-}
+bind = '0.0.0.0:8080'
+logfile = '../gunicorn.log'
+workers = 1

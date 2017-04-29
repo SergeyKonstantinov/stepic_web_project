@@ -1,9 +1,10 @@
-def app(environ, start_response):
+def hello_app(env, start_response):
+    body = [p for p in env['QUERY_STRING'].split('&')]
+    body = '\n'.join(body)
     status = '200 OK'
-    headers = [
-        ('Content-Type', 'text/plain')
+    response_headers = [('Content-Type', 'text/plain'),
+                        ('Content-Length', str(len(body)))
     ]
-    start_response(status, headers)
-    resp = environ['QUERY_STRING'].split('&')
-    resp = [item+'\r\n' for item in resp]
-    return resp
+
+    start_response(status, response_headers)
+    return [ body ]

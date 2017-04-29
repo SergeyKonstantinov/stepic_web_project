@@ -1,4 +1,9 @@
 def app(environ, start_response):
-    start_response('200 OK', [('Content-Type', 'text/plain')])
-    yield environ['QUERY_STRING'].replace('&', '\n').encode('UTF-8')
-
+    status = '200 OK'
+    headers = [
+        ('Content-Type', 'text/plain')
+    ]
+    start_response(status, headers)
+    resp = environ['QUERY_STRING'].split('&')
+    resp = [item+'\r\n' for item in resp]
+    return resp
